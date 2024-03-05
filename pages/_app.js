@@ -1,5 +1,6 @@
 import { ThirdwebProvider } from '@thirdweb-dev/react';
 import '../styles/globals.css';
+import Navbar from '../Components/Navbar';
 
 // This is the chain your dApp will work on.
 // Change this to the chain your app is built for.
@@ -12,6 +13,7 @@ function MyApp({ Component, pageProps }) {
 			activeChain={activeChain}
 			clientId={process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID}
 		>
+			    <Navbar />
 			<Component {...pageProps} />
 		</ThirdwebProvider>
 	);
