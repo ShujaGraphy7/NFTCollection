@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThirdwebProvider activeChain={activeChainId}>
       <Head>
-        <title>thirdweb Edition Drop Minting Customizable Page</title>
+        <title>OG NFT Collection</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
           name="description"
