@@ -224,10 +224,9 @@ const Home: NextPage = () => {
     [tokenId]
   );
 
-  // State to store NFT metadata
-  const [nftMetadata, setNFTMetadata] = useState(null);
-  const [metadataLoading, setMetadataLoading] = useState(false);
-
+ // State to store NFT metadata
+const [nftMetadata, setNFTMetadata] = useState<NFTMetadata | null>(null);
+const [metadataLoading, setMetadataLoading] = useState(false);
   // Fetch and parse the JSON data from the URL
   const fetchNFTMetadata = async () => {
     try {
