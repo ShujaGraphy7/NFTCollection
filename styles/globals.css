@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
 
 /* Change the values in here to match your branding */
@@ -43,3 +44,8 @@ body {
 *::after {
   box-sizing: border-box;
 }
+=======
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+>>>>>>> fab185438db06246458156c7441582e80620f3c5
