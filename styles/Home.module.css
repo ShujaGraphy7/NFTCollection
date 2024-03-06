@@ -128,19 +128,39 @@
   justify-content: space-between;
   align-items: center;
 }
+
 .navLinks {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 .navLinks a {
   color: #fff;
   text-decoration: none;
   margin-right: 1rem;
   transition: all 0.2s ease-in-out;
 }
+
 .navLinks a:hover {
   color: #0ea5e9;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+
+  .navLinks {
+    margin-top: 1rem;
+  }
+
+  .navLinks a {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
 }
 
 .heroSection {
@@ -153,20 +173,24 @@
   align-items: center;
   border-radius: 20px;
 }
+
 .collectionImage {
   border-radius: 20px;
   overflow: hidden;
   margin-right: 2rem;
 }
+
 .claimContainer {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
 }
+
 .claimValue {
   font-size: 2rem;
 }
+
 .claimInput {
   color: #fff;
   padding: 1rem 1rem;
@@ -175,6 +199,7 @@
   margin: 0px 0.25rem;
   width: 30%;
 }
+
 .claimBtn {
   background-color: #fff;
   color: #333;
@@ -197,3 +222,22 @@
   max-width: 32%;
   margin: 0.5%;
 }
+
+
+.connectButton {
+  background: linear-gradient(to right, purple, pink);
+
+  border-radius: 2px !important;
+  /* -webkit-box-shadow: 10px 10px 20px -6px rgba(100, 230, 250, 0.7) !important;
+  -moz-box-shadow: 10px 10px 20px -6px rgba(100, 230, 250, 0.7) !important;
+  box-shadow: 0px 0px 20px 2px rgba(100, 230, 250, 0.7) !important; */
+  /* color: #fff !important; */
+  cursor: pointer !important;
+  font-size: 100% !important;
+  height: 44px !important;
+  padding: 0 25px !important;
+  position: relative !important;
+  text-align: center !important;
+  transition: all 0.15s ease-in-out !important;
+}
+
