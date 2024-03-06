@@ -5,16 +5,26 @@ import {
   useClaimerProofs,
   useClaimIneligibilityReasons,
   useContract,
+  useContractRead,
   useContractMetadata,
   useTotalCirculatingSupply,
   Web3Button,
 } from "@thirdweb-dev/react";
 import { BigNumber, utils } from "ethers";
 import type { NextPage } from "next";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import styles from "../styles/Theme.module.css";
 import { parseIneligibility } from "../utils/parseIneligibility";
 import { myEditionDropContractAddress, tokenId } from "../const/yourDetails";
+
+
+interface NFTMetadata {
+  name: string;
+  description: string;
+  image?: string;
+  animation_url?: string;
+  // Add other properties as needed
+}
 
 const Home: NextPage = () => {
   const address = useAddress();
@@ -206,6 +216,81 @@ const Home: NextPage = () => {
     quantity,
   ]);
 
+
+  // Fetch the URI using useContractRead
+  const { data: tokenUri, isLoading: uriLoading } = useContractRead(
+    editionDrop,
+    "uri",
+    [tokenId]
+  );
+
+  // State to store NFT metadata
+  const [nftMetadata, setNFTMetadata] = useState(null);
+  const [metadataLoading, setMetadataLoading] = useState(false);
+
+  // Fetch and parse the JSON data from the URL
+  const fetchNFTMetadata = async () => {
+    try {
+      if (tokenUri) {
+        const isIpfsUri = tokenUri.startsWith("ipfs://");
+        setMetadataLoading(true);
+
+        if (isIpfsUri) {
+          // Extract the IPFS hash from the URI
+          const ipfsHash = tokenUri.replace("ipfs://", "");
+
+          const response = await fetch(`https://ipfs.io/ipfs/${ipfsHash}`);
+
+          if (response.ok) {
+            const jsonData = await response.json();
+            console.log(jsonData)
+            setNFTMetadata(jsonData);
+          } else {
+            console.error(`Failed to fetch NFT metadata. HTTP status: ${response.status}`);
+          }
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching NFT metadata:", error);
+    } finally {
+      setMetadataLoading(false);
+    }
+  };
+
+  // Effect to fetch NFT metadata when tokenUri changes
+  useEffect(() => {
+    fetchNFTMetadata();
+  }, [tokenUri]);
+
+  const imageSrc = useMemo(() => {
+    if (nftMetadata?.image) {
+      const isIpfsUri = nftMetadata?.image.startsWith("ipfs://");
+
+      if (isIpfsUri) {
+        const ipfsHash = nftMetadata?.image.replace("ipfs://", "");
+        return `https://ipfs.io/ipfs/${ipfsHash}`;
+      } else {
+        return nftMetadata?.image;
+      }
+    }
+    return null;
+  }, [nftMetadata?.image]);
+
+  const animationUrlSrc = useMemo(() => {
+    if (nftMetadata?.animation_url) {
+      const isIpfsUri = nftMetadata?.animation_url.startsWith("ipfs://");
+
+      if (isIpfsUri) {
+        const ipfsHash = nftMetadata?.animation_url.replace("ipfs://", "");
+        return `https://ipfs.io/ipfs/${ipfsHash}`;
+      } else {
+        return nftMetadata?.animation_url;
+      }
+    }
+    return null;
+  }, [nftMetadata?.animation_url]);
+
+
   return (
     <div className={styles.container}>
       <div className={styles.mintInfoContainer}>
@@ -224,11 +309,31 @@ const Home: NextPage = () => {
 
             <div className={styles.imageSide}>
               {/* Image Preview of NFTs */}
-              <img
-                className={styles.image}
-                src={contractMetadata?.image}
-                alt={`${contractMetadata?.name} preview image`}
-              />
+              {imageSrc && (
+                <>
+                  {animationUrlSrc &&
+                    animationUrlSrc.includes(".mp4") ? (
+                    // Displaying video if animation_url ends with .mp4
+                    <video
+                      className={styles.image}
+                      autoPlay
+                      loop
+                      muted  // Add 'muted' to avoid potential issues with auto-play policies
+                      controls={false}
+                    >
+                      <source src={animationUrlSrc} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  ) : (
+                    // Displaying image for other URL formats
+                    <img
+                      className={styles.image}
+                      src={imageSrc}
+                      alt={`${nftMetadata?.name} preview`}
+                    />
+                  )}
+                </>
+              )}
 
               {/* Amount claimed so far */}
               <div className={styles.mintCompletionArea}>
@@ -250,9 +355,9 @@ const Home: NextPage = () => {
               </div>
 
               {claimConditions.data?.length === 0 ||
-              claimConditions.data?.every(
-                (cc) => cc.maxClaimableSupply === "0"
-              ) ? (
+                claimConditions.data?.every(
+                  (cc) => cc.maxClaimableSupply === "0"
+                ) ? (
                 <div>
                   <h2>
                     This drop is not ready to be minted yet. (No claim condition
