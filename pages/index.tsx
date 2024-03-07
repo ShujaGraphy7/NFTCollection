@@ -416,12 +416,12 @@ const [metadataLoading, setMetadataLoading] = useState(false);
         )}
       </div>
       {/* Powered by thirdweb */}{" "}
-      <img
+      {/* <img
         src="/logo.png"
         alt="thirdweb Logo"
         width={135}
         className={styles.buttonGapTop}
-      />
+      /> */}
     </div>
   );
 };
