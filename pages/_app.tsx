@@ -4,6 +4,7 @@ import "../styles/globals.css";
 import Head from "next/head";
 import ThirdwebGuideFooter from "../components/GitHubLink";
 import{Navbar} from  "../components/Navbar";
+import Footer from "../components/Footer";
 
 
 // This is the chain your dApp will work on.
@@ -27,7 +28,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Navbar/>
 
       <Component {...pageProps} />
-    
+     <Footer/>
     </ThirdwebProvider>
   );
 }
