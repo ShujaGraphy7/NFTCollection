@@ -210,3 +210,23 @@
   width: 50px; /* Adjust according to your logo size */
   margin-right: 0.5rem;
 }
+
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  margin-top: 40px;
+  height: 90px;
+}
+
+.socialIcons {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.socialImg {
+  width: 40px;
+  height: 40px;
+}
