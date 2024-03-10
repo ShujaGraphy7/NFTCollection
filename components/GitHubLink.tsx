@@ -32,7 +32,7 @@ export default function ThirdwebGuideFooter() {
           width={40}
           height={40}
           role="button"
-          style={{ cursor: "pointer" }}
+      style={{ cursor: "pointer" }}
           onClick={() => window.open(url, "_blank")}
         />
       </div>
