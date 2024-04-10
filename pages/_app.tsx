@@ -8,7 +8,7 @@ import Footer from "../components/Footer";
 
 
 // This is the chain your dApp will work on.
-const activeChainId = ChainId.Mumbai;
+const activeChainId = ChainId.AvalancheFujiTestnet;
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
