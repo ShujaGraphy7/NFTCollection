@@ -211,22 +211,98 @@
   margin-right: 0.5rem;
 }
 
-.footer {
+/* Footer Styles */
+.Footer {
   background-color: #333;
-  color: #fff;
-  padding: 20px;
-  text-align: center;
-  margin-top: 40px;
-  height: 90px;
+  border-top: 1px solid #E5E7EB;
+  max-width: 100%;
+  padding: 1rem;
+  margin-top: 100px;
 }
 
-.socialIcons {
+/* .Logo {
+  display: flex;
+  align-items: center;
+} */
+
+.logo{
+  display: flex;
+
+}
+
+.listInLine{
+  color: white;
+
+}
+
+.Logo img {
+  margin-right: 0.5rem;
+}
+
+.Logo span {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+}
+
+.socialLinks {
   display: flex;
   justify-content: center;
-  gap: 30px;
+  margin-top: 1rem;
 }
 
-.socialImg {
-  width: 40px;
-  height: 40px;
+.socialLinks a {
+  margin-left: 0.5rem;
+  color: white;
+}
+
+.socialLinks a:hover {
+  color: #000000;
+}
+
+/* Responsive Styles */
+@media (min-width: 640px) {
+  .footerContent {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+  }
+
+.links {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+  }
+
+  .links h2 {
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #000000;
+      margin-bottom: 0.5rem;
+  }
+
+  .links ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+  }
+
+ .links ul li {
+      margin-bottom: 0.5rem;
+  }
+
+  .links ul li a {
+      color: #808080;
+  }
+
+.links ul li a:hover {
+      color: #000000;
+  }
+
+   .copyright {
+      font-size: 0.75rem;
+      color: #808080;
+  }
 }
